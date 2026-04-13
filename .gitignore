@@ -1,1 +1,12 @@
 node_modules/
+
+# Uploads
+server/uploads/
+server/temp/
+*.pdf
+*.docx
+*.doc
+*.txt
+
+# Keep the folder but ignore contents
+!server/uploads/.gitkeep
