@@ -11,7 +11,7 @@ const app = express.Router();
 // configurign storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, "data/raw_docs/");
   },
   filename: (req, file, cb) => {
     const uniqueName = randomUUID() + path.extname(file.originalname);
@@ -41,8 +41,8 @@ const upload = multer({
 });
 
 // checkign uploads directory , creating one if not present
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
+if (!fs.existsSync("data/raw_docs/")) {
+  fs.mkdirSync("data/raw_docs/", { recursive: true });
 }
 
 // upload endpoint
@@ -54,19 +54,22 @@ app.post("/file/upload", upload.single("file"), async (req, res) => {
       });
     }
 
+    const docId = randomUUID();
+
     // file info
     const fileData = {
       originalname: req.file.originalname,
-      filename: req.file.filename,
+      filename: docId + path.extname(req.file.originalname),
       path: req.file.path,
       size: req.file.size,
       mimetype: req.file.mimetype,
     };
 
+    let aiRes;
     try {
-      await axios.post(`${env.BACKEND_URL}/ingest`, {
-        doc_id: req.file.filename,
-        file_path: req.file.path,
+      aiRes = await axios.post(`${env.AI_SERVICE_URL}/ingest`, {
+        doc_id: docId,
+        file_path: path.resolve(req.file.path),
       });
     } catch (pyErr) {
       fs.unlinkSync(req.file.path);
@@ -77,6 +80,8 @@ app.post("/file/upload", upload.single("file"), async (req, res) => {
 
     res.status(200).json({
       message: "File upload successfully",
+      doc_id: docId,
+      chunks: aiRes.data.chunks,
       file: fileData,
     });
   } catch (err) {
