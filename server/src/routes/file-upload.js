@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
     cb(null, "data/raw_docs/");
   },
   filename: (req, file, cb) => {
-    const uniqueName = randomUUID() + path.extname(file.originalname);
+    const docId = randomUUID();
+    req.docId = docId;
+    const uniqueName = req.docId + path.extname(file.originalname);
     cb(null, uniqueName);
   },
 });
@@ -54,7 +56,7 @@ app.post("/file/upload", upload.single("file"), async (req, res) => {
       });
     }
 
-    const docId = randomUUID();
+    const docId = req.docId;
 
     // file info
     const fileData = {
@@ -67,24 +69,41 @@ app.post("/file/upload", upload.single("file"), async (req, res) => {
 
     let aiRes;
     try {
-      aiRes = await axios.post(`${env.AI_SERVICE_URL}/ingest`, {
-        doc_id: docId,
-        file_path: path.resolve(req.file.path),
-      });
+      aiRes = await axios.post(
+        `${env.AI_SERVICE_URL}/ingest`,
+        {
+          doc_id: docId,
+          file_path: path.resolve(req.file.path),
+        },
+        {
+          timeout: 30000,
+        },
+      );
     } catch (pyErr) {
-      fs.unlinkSync(req.file.path);
+      if (fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
+      // above fs.unlinkSync() is a Node.js method that deletes a file from the filesystem.
+      // When AI Service Fails, we have to remove the existing uploaded file from disk
+      console.error("AI Service Error:", pyErr.message);
       return res.status(502).json({
         error: "AI service failed to process file",
+        details: pyErr.response?.data || pyErr.message,
       });
     }
 
     res.status(200).json({
       message: "File upload successfully",
       doc_id: docId,
-      chunks: aiRes.data.chunks,
+      chunks: aiRes.data.chunks || 0,
       file: fileData,
     });
   } catch (err) {
+    if (req.file && fs.existsSync(req.file.path)) {
+      fs.unlinkSync(req.file.path);
+    }
+
+    console.error("Upload Error:", err);
     res.status(500).json({
       error: err.message,
     });
