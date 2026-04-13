@@ -10,3 +10,7 @@ server/temp/
 
 # Keep the folder but ignore contents
 !server/uploads/.gitkeep
+
+# python stuffs
+__pycache__/
+*.log
