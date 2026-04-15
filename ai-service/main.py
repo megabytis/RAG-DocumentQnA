@@ -5,6 +5,7 @@ import os
 import logging
 from loaders import load_file
 from chunkers import chunk_text
+from embedders import get_embedding
 
 app = FastAPI()
 
@@ -44,6 +45,10 @@ async def ingest(request: IngestRequest):
     chunks = chunk_text(result)
     # for i, chunk in enumerate(chunks[:2]):
     #     print(f"Chunk {i}: {chunk[:100]}...")
-
+    
+    # embeddings
+    embeddings = get_embedding(chunks)
+    
+    
     # response
     return {"status": "indexed", "doc_id": request.doc_id, "chunks": 0}
