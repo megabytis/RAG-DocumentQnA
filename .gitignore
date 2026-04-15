@@ -14,3 +14,7 @@ server/temp/
 # python stuffs
 __pycache__/
 *.log
+
+# db 
+data/
+.env
