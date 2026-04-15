@@ -6,6 +6,7 @@ import logging
 from loaders import load_file
 from chunkers import chunk_text
 from embedders import get_embedding
+from vector_store import store_embeddings
 
 app = FastAPI()
 
@@ -40,15 +41,19 @@ async def ingest(request: IngestRequest):
     # reading contents from the file using the filepath and calling our loaders/ module
     result = load_file(file_path=request.file_path, file_type=file_type)
     # print(result)
-    
+
     # chunking
     chunks = chunk_text(result)
     # for i, chunk in enumerate(chunks[:2]):
     #     print(f"Chunk {i}: {chunk[:100]}...")
-    
+
     # embeddings
     embeddings = get_embedding(chunks)
-    
-    
+
+    # storing embeddings
+    store = store_embeddings(
+        chunks=chunks, doc_id=request.doc_id, embeddings=embeddings
+    )
+
     # response
     return {"status": "indexed", "doc_id": request.doc_id, "chunks": 0}
