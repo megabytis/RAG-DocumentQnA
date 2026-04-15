@@ -6,7 +6,30 @@ import logging
 from loaders import load_file
 from chunkers import chunk_text
 from embedders import get_embedding
-from vector_store import store_embeddings
+from vector_store import store_embeddings, search_doc
+from dotenv import load_dotenv
+
+load_dotenv()
+from langchain_openai import ChatOpenAI
+
+API = os.getenv("OPENROUTER_API_KEY")
+MODEL = "nvidia/nemotron-3-nano-30b-a3b:free"
+URL = "https://openrouter.ai/api/v1/"
+
+llm = ChatOpenAI(model=MODEL, api_key=API, base_url=URL)
+
+
+def call_llm(context, query):
+    prompt = f"""context: {context}
+    
+    Question: {query}
+    
+    Answer based only on the context above:"""
+
+    response = llm.invoke(prompt)
+
+    return response.content
+
 
 app = FastAPI()
 
@@ -57,3 +80,28 @@ async def ingest(request: IngestRequest):
 
     # response
     return {"status": "indexed", "doc_id": request.doc_id, "chunks": 0}
+
+
+class QueryRequest(BaseModel):
+    query: str
+    doc_id: str
+
+
+@app.post("/query")
+async def query(request: QueryRequest):
+    logging.info(f"received query: {request.query} \n doc_id: {request.doc_id}")
+
+    # query embedding
+    query_embedding = get_embedding([request.query])[0]
+
+    # searching in chroma DB
+    results = search_doc(query_embedding=query_embedding, doc_id=request.doc_id)
+
+    # retrieved chunks
+    retrieved_chunks = results["documents"][0]
+    context = " ".join(retrieved_chunks).replace("\n", " ")
+
+    # sending chunks to LLM
+    answer = call_llm(context, request.query)
+
+    return {"answer": answer, "doc_id": request.doc_id, "sources": results["ids"][0]}
