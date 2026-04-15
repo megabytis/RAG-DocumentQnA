@@ -1,14 +1,12 @@
 import express from "express";
 
+import router from "./router.js";
+
 const app = express();
 
-import fileUploadRouter from "./routes/file-upload.js";
+app.use(express.json());
 
-app.get("/me", (req, res, next) => {
-  res.send("Hey there Miku!");
-});
-
-app.use("/api/v1/", fileUploadRouter);
+app.use("/api/v1", router);
 
 app.listen(5000, () => {
   console.log("App is listening on port 5000......");
