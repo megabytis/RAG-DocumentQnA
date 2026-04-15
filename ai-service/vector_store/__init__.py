@@ -1,1 +1,1 @@
-from .chroma_store import store_embeddings
+from .chroma_store import store_embeddings,search_doc
