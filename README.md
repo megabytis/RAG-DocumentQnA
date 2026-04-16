@@ -1,5 +1,6 @@
 # RAG-DocumentQnA
 
+![RAG Document QnA Demo](./RAG_documenQnA.gif)
 **RAG-DocumentQnA** is a Document Intelligence API built to ingest documents, index them, and answer user queries using context-aware retrieval (RAG) with traceable citations. The system restricts generation exclusively to retrieved evidence, effectively preventing LLM hallucinations.
 
 ## 🎯 System Objective
