@@ -15,21 +15,22 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const docId = randomUUID();
-    req.docId = docId;
-    const uniqueName = req.docId + path.extname(file.originalname);
+    file.docId = docId;
+    const uniqueName = docId + path.extname(file.originalname);
     cb(null, uniqueName);
   },
 });
 
 // filtering file
 const fileFilter = (req, file, cb) => {
-  const allowdFileTypes = [
+  const allowedFileTypes = [
     "application/pdf",
     "text/plain",
     "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
   ];
 
-  if (allowdFileTypes.includes(file.mimetype)) {
+  if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
     cb(new Error("Invalid file type. Only PDF, TXT, DOC allowed."), false);
@@ -48,59 +49,80 @@ if (!fs.existsSync("data/raw_docs/")) {
 }
 
 // upload endpoint
-app.post("/file/upload", upload.single("file"), async (req, res) => {
+app.post("/file/upload", upload.array("files", 5), async (req, res) => {
   try {
-    if (!req.file) {
+    if (!req.files || req.files.length === 0) {
       return res.status(400).json({
         error: "No file uploaded",
       });
     }
 
-    const docId = req.docId;
+    const results = [];
+    const failuers = [];
 
-    // file info
-    const fileData = {
-      originalname: req.file.originalname,
-      filename: docId + path.extname(req.file.originalname),
-      path: req.file.path,
-      size: req.file.size,
-      mimetype: req.file.mimetype,
-    };
+    // now passing each file individually
+    for (const file of req.files) {
+      const docId = file.docId;
 
-    let aiRes;
-    try {
-      aiRes = await axios.post(
-        `${env.AI_SERVICE_URL}/ingest`,
-        {
+      const fileData = {
+        filename: file.originalname,
+        path: file.path,
+        size: file.size,
+        mimetype: file.mimetype,
+      };
+
+      let aiRes;
+      try {
+        aiRes = await axios.post(
+          `${env.AI_SERVICE_URL}/ingest`,
+          {
+            doc_id: docId,
+            file_path: path.resolve(file.path),
+          },
+          {
+            timeout: 30000,
+          },
+        );
+
+        results.push({
+          status: "success",
           doc_id: docId,
-          file_path: path.resolve(req.file.path),
-        },
-        {
-          timeout: 30000,
-        },
-      );
-    } catch (pyErr) {
-      if (fs.existsSync(req.file.path)) {
-        fs.unlinkSync(req.file.path);
+          chunks: aiRes.data.chunks || 0,
+          file: fileData,
+        });
+      } catch (pyErr) {
+        if (fs.existsSync(req.files.path)) {
+          fs.unlinkSync(req.files.path);
+        }
+        // above fs.unlinkSync() is a Node.js method that deletes a file from the filesystem.
+        // When AI Service Fails, we have to remove the existing uploaded file from disk
+        failuers.push({
+          file: file.originalname,
+          error: pyErr.response?.data || pyErr.message,
+        });
       }
-      // above fs.unlinkSync() is a Node.js method that deletes a file from the filesystem.
-      // When AI Service Fails, we have to remove the existing uploaded file from disk
-      console.error("AI Service Error:", pyErr.message);
+    }
+
+    if (results.length === 0) {
       return res.status(502).json({
-        error: "AI service failed to process file",
-        details: pyErr.response?.data || pyErr.message,
+        error: "AI service failed to process all files",
+        failuers,
       });
     }
 
     res.status(200).json({
-      message: "File upload successfully",
-      doc_id: docId,
-      chunks: aiRes.data.chunks || 0,
-      file: fileData,
+      message: `Successfully processed ${results.length} of ${req.files.length} file(s)`,
+      uploaded: results,
+      failed: failuers.length > 0 ? failuers : undefined,
     });
   } catch (err) {
-    if (req.file && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
+    // Now cleaning up ALL uploaded files on unexpected error
+    if (req.files && Array.isArray(req.files)) {
+      req.files.forEach((file) => {
+        if (fs.existsSync(file.path)) {
+          fs.unlinkSync(file.path);
+        }
+      });
     }
 
     console.error("Upload Error:", err);
