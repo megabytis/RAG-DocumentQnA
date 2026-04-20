@@ -12,11 +12,15 @@ from dotenv import load_dotenv
 load_dotenv()
 from langchain_openai import ChatOpenAI
 
-API = os.getenv("OPENROUTER_API_KEY")
-MODEL = "nvidia/nemotron-3-nano-30b-a3b:free"
-URL = "https://openrouter.ai/api/v1/"
+API = os.getenv("DEEPSEEK_API_KEY")
+MODEL = "deepseek-chat"
+URL = "https://api.deepseek.com/"
 
-llm = ChatOpenAI(model=MODEL, api_key=API, base_url=URL)
+llm = ChatOpenAI(
+    model=MODEL,
+    api_key=API,
+    base_url=URL,
+)
 
 
 def call_llm(context, query):
@@ -84,24 +88,30 @@ async def ingest(request: IngestRequest):
 
 class QueryRequest(BaseModel):
     query: str
-    doc_id: str
+    doc_ids: list[str]
 
 
 @app.post("/query")
 async def query(request: QueryRequest):
-    logging.info(f"received query: {request.query} \n doc_id: {request.doc_id}")
+    # logging.info(f"received query: {request.query} \n doc_id: {request.doc_id}")
 
     # query embedding
     query_embedding = get_embedding([request.query])[0]
 
-    # searching in chroma DB
-    results = search_doc(query_embedding=query_embedding, doc_id=request.doc_id)
+    all_documents = []
+    all_sources = []
 
-    # retrieved chunks
-    retrieved_chunks = results["documents"][0]
-    context = " ".join(retrieved_chunks).replace("\n", " ")
+    # searching in chroma DB
+    for doc_id in request.doc_ids:
+        results = search_doc(
+            query_embedding=query_embedding, doc_id=doc_id, n_results=3
+        )
+        all_documents.extend(results["documents"][0])
+        all_sources.extend(results["ids"][0])
+
+    context = " ".join(all_documents).replace("\n", " ")
 
     # sending chunks to LLM
     answer = call_llm(context, request.query)
 
-    return {"answer": answer, "doc_id": request.doc_id, "sources": results["ids"][0]}
+    return {"answer": answer, "doc_id": request.doc_ids, "sources": all_sources}

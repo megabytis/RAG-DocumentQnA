@@ -6,10 +6,12 @@ const app = express.Router();
 
 app.post("/query", async (req, res, next) => {
   try {
-    const { query, doc_id } = req.body;
+    const { query, doc_ids } = req.body;
 
-    if (!query) {
-      throw new Error("Invalid query!");
+    if (!query || !doc_ids || doc_ids.length === 0) {
+      return res.status(400).json({
+        error: "Query and doc_ids array are required",
+      });
     }
 
     let aiRes;
@@ -18,7 +20,7 @@ app.post("/query", async (req, res, next) => {
         `${env.AI_SERVICE_URL}/query`,
         {
           query: query,
-          doc_id: doc_id,
+          doc_ids: doc_ids,
         },
         {
           timeout: 30000,
@@ -34,7 +36,7 @@ app.post("/query", async (req, res, next) => {
 
     res.status(200).json({
       answer: aiRes.data.answer,
-      doc_id: aiRes.data.doc_id,
+      doc_id: aiRes.data.doc_ids,
       sources: aiRes.data.sources,
     });
   } catch (err) {
