@@ -6,11 +6,13 @@ import logging
 from loaders import load_file
 from chunkers import chunk_text
 from embedders import get_embedding
-from vector_store import store_embeddings, search_doc
+from vector_store import store_embeddings
 from dotenv import load_dotenv
+from retrieval import hybrid_search
 
 load_dotenv()
 from langchain_openai import ChatOpenAI
+import json
 
 API = os.getenv("DEEPSEEK_API_KEY")
 MODEL = "deepseek-chat"
@@ -71,8 +73,15 @@ async def ingest(request: IngestRequest):
 
     # chunking
     chunks = chunk_text(result)
-    # for i, chunk in enumerate(chunks[:2]):
-    #     print(f"Chunk {i}: {chunk[:100]}...")
+    # chunks_with_ids = [{"id":f"/"}]
+
+    # storing chunks
+    chunks_dir = "chunks_store"
+    if not os.path.exists(chunks_dir):
+        os.makedirs(chunks_dir)
+
+    with open(f"{chunks_dir}/{request.doc_id}.json", "w") as f:
+        json.dump(chunks, f)
 
     # embeddings
     embeddings = get_embedding(chunks)
@@ -103,13 +112,11 @@ async def query(request: QueryRequest):
 
     # searching in chroma DB
     for doc_id in request.doc_ids:
-        results = search_doc(
-            query_embedding=query_embedding, doc_id=doc_id, n_results=3
-        )
-        all_documents.extend(results["documents"][0])
-        all_sources.extend(results["ids"][0])
+        results = hybrid_search(doc_id, request.query, query_embedding)
+        all_documents.extend(results)
+        all_sources.extend([doc_id] * len(results))
 
-    context = " ".join(all_documents).replace("\n", " ")
+    context = " ".join(all_documents)
 
     # sending chunks to LLM
     answer = call_llm(context, request.query)
