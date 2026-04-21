@@ -91,8 +91,8 @@ app.post("/file/upload", upload.array("files", 5), async (req, res) => {
           file: fileData,
         });
       } catch (pyErr) {
-        if (fs.existsSync(req.files.path)) {
-          fs.unlinkSync(req.files.path);
+        if (fs.existsSync(file.path)) {
+          fs.unlinkSync(file.path);
         }
         // above fs.unlinkSync() is a Node.js method that deletes a file from the filesystem.
         // When AI Service Fails, we have to remove the existing uploaded file from disk
