@@ -102,8 +102,8 @@ To run this application locally, ensure you have the following installed:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/rag-document-qna.git
-cd rag-document-qna
+git clone https://github.com/megabytis/RAG-DocumentQnA.git
+cd RAG-DocumentQnA
 ```
 
 ### 2. Configure the AI Service (Python)
@@ -212,7 +212,7 @@ To verify the system's robust **90% accuracy** and strict anti-hallucination beh
 ## 🗂️ Project Folder Structure
 
 ```text
-rag-document-qna/
+RAG-DocumentQnA/
 ├── ai-service/                # Python Machine Learning Microservice
 │   ├── loaders/               # Text extractors for PDF/TXT/DOC
 │   ├── chunkers/              # Recursive text splitters
