@@ -26,13 +26,24 @@ llm = ChatOpenAI(
 
 
 def call_llm(context, query):
-    prompt = f"""context: {context}
+    system_prompt = """You must answer ONLY using the provided content.
     
-    Question: {query}
+    If the answer is not explicitely present in the context:
+    respond with exactly: NOT_FOUND
     
-    Answer based only on the context above:"""
+    Do not guess.
+    Do not use outside knowledge."""
 
-    response = llm.invoke(prompt)
+    user_prompt = f"""context: {context}
+    
+    Question: {query}"""
+
+    response = llm.invoke(
+        [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+    )
 
     return response.content
 
@@ -123,5 +134,8 @@ async def query(request: QueryRequest):
 
     # sending chunks to LLM
     answer = call_llm(context, request.query)
+
+    if "NOT_FOUND" in answer:
+        return {"answer": "Cannot answer based on the documents", "found": False}
 
     return {"answer": answer, "doc_id": request.doc_ids, "sources": all_sources}
