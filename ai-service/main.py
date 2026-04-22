@@ -8,7 +8,7 @@ from chunkers import chunk_text
 from embedders import get_embedding
 from vector_store import store_embeddings
 from dotenv import load_dotenv
-from retrieval import hybrid_search
+from retrieval import hybrid_search, rerank
 
 load_dotenv()
 from langchain_openai import ChatOpenAI
@@ -116,7 +116,10 @@ async def query(request: QueryRequest):
         all_documents.extend(results)
         all_sources.extend([doc_id] * len(results))
 
-    context = " ".join(all_documents)
+    # reranking
+    final_chunks = rerank(query=request.query, chunks=all_documents)
+
+    context = " ".join(final_chunks)
 
     # sending chunks to LLM
     answer = call_llm(context, request.query)
