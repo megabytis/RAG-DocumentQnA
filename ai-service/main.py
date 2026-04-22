@@ -14,9 +14,9 @@ load_dotenv()
 from langchain_openai import ChatOpenAI
 import json
 
-API = os.getenv("DEEPSEEK_API_KEY")
-MODEL = "deepseek-chat"
-URL = "https://api.deepseek.com/"
+API = os.getenv("GROQ_API_KEY")
+MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"
+URL = "https://api.groq.com/openai/v1"
 
 llm = ChatOpenAI(
     model=MODEL,
@@ -26,11 +26,15 @@ llm = ChatOpenAI(
 
 
 def call_llm(context, query):
-    system_prompt = """You must answer ONLY using the provided content.
-    
-    If the answer is not explicitely present in the context:
+
+    system_prompt = """You must answer ONLY using the provided context.
+
+    If information exists in context but not in compared form:
+    Synthesize answer from available information.
+
+    If answer is NOT in context at all:
     respond with exactly: NOT_FOUND
-    
+
     Do not guess.
     Do not use outside knowledge."""
 
