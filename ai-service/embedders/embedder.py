@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 import os
 
-LOCAL_MODEL_PATH = os.path.expanduser("~/local_models/all-MiniLM-L6-v2")
+LOCAL_MODEL_PATH = os.path.expanduser("~/local_models/sentence_transformer")
 
 # Load once, reuse forever
 _model = None
