@@ -1,24 +1,142 @@
 [
   {
-    "query": "What were the symptoms of COVID-19?",
-    "expected_answer": "fever, sore throat, cough, fatigue, loss of smell",
-    "doc_ids": ["d2981814-dcc6-4f0b-ace5-25f679ef0bb9"],
+    "query": "What date did the WHO describe the COVID-19 outbreak as a pandemic?",
+    "expected_answer": "11 March 2020",
+    "doc_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c",
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_1",
     "relevant_chunk": true
   },
   {
-    "query": "How many deaths in Odisha cyclone?",
+    "query": "What was the lowest pressure recorded for the 1999 Odisha cyclone?",
+    "expected_answer": "912 hPa (mbar); 26.93 inHg",
+    "doc_id": "5320ce59-13a9-4459-b00f-274e45684042",
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_0",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the official ICAO code for Homey Airport?",
+    "expected_answer": "KXTA",
+    "doc_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937",
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_1",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What are the three common clusters of COVID-19 symptoms identified?",
+    "expected_answer": "one respiratory symptom cluster, a musculoskeletal symptom cluster, a cluster of digestive symptoms",
+    "doc_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c",
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_38",
+    "relevant_chunk": true
+  },
+  {
+    "query": "How many fatalities were enumerated by the Government of India for the 1999 Odisha cyclone?",
     "expected_answer": "9,887",
-    "doc_ids": ["0c62eb3a-663f-4ed9-be3e-26297ded8605"],
+    "doc_id": "5320ce59-13a9-4459-b00f-274e45684042",
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_6",
     "relevant_chunk": true
   },
   {
-    "query": "What is the capital of France?",
-    "expected_answer": "NOT_FOUND",
-    "doc_ids": [
-      "0c62eb3a-663f-4ed9-be3e-26297ded8605",
-      "d2981814-dcc6-4f0b-ace5-25f679ef0bb9",
-      "e797ffdb-6eb8-43cc-91b1-0e043c4aff5f"
-    ],
+    "query": "What was the name of the project under which the CIA established the Groom Lake test facility in April 1955?",
+    "expected_answer": "Project AQUATONE",
+    "doc_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937",
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_13",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the infection fatality ratio (IFR) for the age group 85+?",
+    "expected_answer": "28.3%",
+    "doc_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c",
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_32",
+    "relevant_chunk": true
+  },
+  {
+    "query": "In which district of Odisha did the majority of deaths from the 1999 cyclone occur?",
+    "expected_answer": "Jagatsinghpur",
+    "doc_id": "5320ce59-13a9-4459-b00f-274e45684042",
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_27",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the name of the first full-scale development prototype of the F-117 that first flew at Area 51?",
+    "expected_answer": "YF-117A 79-780",
+    "doc_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937",
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_59",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the name of the antiviral protease inhibitor approved by the EMA in 2021 to treat COVID-19?",
+    "expected_answer": "Paxlovid",
+    "doc_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c",
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_51",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the peak storm surge height estimated by the Indian Ministry of Urban Development for the 1999 Odisha cyclone?",
+    "expected_answer": "6.7 metres (22 feet)",
+    "doc_id": "5320ce59-13a9-4459-b00f-274e45684042",
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_29",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the name of the project that tested Soviet tracking and missile control radar systems at Area 51?",
+    "expected_answer": "HAVE GLIB",
+    "doc_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937",
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_55",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the estimated infection fatality ratio (IFR) for seasonal flu in the United States compared to COVID-19?",
+    "expected_answer": "0.1%",
+    "doc_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c",
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_34",
+    "relevant_chunk": true
+  },
+  {
+    "query": "How many people were evacuated from Odisha's coastline in preparation for the 1999 cyclone?",
+    "expected_answer": "nearly 150,000",
+    "doc_id": "5320ce59-13a9-4459-b00f-274e45684042",
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_22",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the name of the fly-by-wire technology demonstration aircraft tested at Area 51?",
+    "expected_answer": "Tacit Blue",
+    "doc_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937",
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_65",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the exact population of Rachel, Nevada?",
+    "expected_answer": null,
+    "doc_id": null,
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "Who was the first person to contract COVID-19?",
+    "expected_answer": null,
+    "doc_id": null,
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "What was the name of the ship that sank during the 1999 Odisha cyclone?",
+    "expected_answer": null,
+    "doc_id": null,
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "How many UFOs are stored at Area 51?",
+    "expected_answer": null,
+    "doc_id": null,
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "What is the current temperature at Groom Lake?",
+    "expected_answer": null,
+    "doc_id": null,
+    "relevant_chunk_id": null,
     "relevant_chunk": false
   }
 ]
