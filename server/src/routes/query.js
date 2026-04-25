@@ -38,6 +38,7 @@ app.post("/query", async (req, res, next) => {
       answer: aiRes.data.answer,
       doc_id: aiRes.data.doc_ids,
       sources: aiRes.data.sources,
+      retrieved_chunks: aiRes.data.retrieved_chunks,
     });
   } catch (err) {
     res.status(400).json({ error: err.message });
