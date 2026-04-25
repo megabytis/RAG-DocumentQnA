@@ -1,0 +1,24 @@
+[
+  {
+    "query": "What were the symptoms of COVID-19?",
+    "expected_answer": "fever, sore throat, cough, fatigue, loss of smell",
+    "doc_ids": ["d2981814-dcc6-4f0b-ace5-25f679ef0bb9"],
+    "relevant_chunk": true
+  },
+  {
+    "query": "How many deaths in Odisha cyclone?",
+    "expected_answer": "9,887",
+    "doc_ids": ["0c62eb3a-663f-4ed9-be3e-26297ded8605"],
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the capital of France?",
+    "expected_answer": "NOT_FOUND",
+    "doc_ids": [
+      "0c62eb3a-663f-4ed9-be3e-26297ded8605",
+      "d2981814-dcc6-4f0b-ace5-25f679ef0bb9",
+      "e797ffdb-6eb8-43cc-91b1-0e043c4aff5f"
+    ],
+    "relevant_chunk": false
+  }
+]
