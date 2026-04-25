@@ -9,6 +9,7 @@ from embedders import get_embedding
 from vector_store import store_embeddings
 from dotenv import load_dotenv
 from retrieval import hybrid_search, rerank
+from utils import normalize_chunks
 
 load_dotenv()
 from langchain_openai import ChatOpenAI
@@ -87,8 +88,8 @@ async def ingest(request: IngestRequest):
     # print(result)
 
     # chunking
-    chunks = chunk_text(result)
-    # chunks_with_ids = [{"id":f"/"}]
+    chunks = chunk_text(result, request.doc_id)
+    chunks = normalize_chunks(chunks)
 
     # storing chunks
     chunks_dir = "chunks_store"
@@ -99,7 +100,8 @@ async def ingest(request: IngestRequest):
         json.dump(chunks, f)
 
     # embeddings
-    embeddings = get_embedding(chunks)
+    texts = [c["text"] for c in chunks]
+    embeddings = get_embedding(texts)
 
     # storing embeddings
     store = store_embeddings(
@@ -134,12 +136,13 @@ async def query(request: QueryRequest):
     # reranking
     final_chunks = rerank(query=request.query, chunks=all_documents)
 
-    context = " ".join(final_chunks)
+    context = " ".join([c["text"] for c in final_chunks])
+    retrieved_ids = [c["id"] for c in final_chunks]
 
     # sending chunks to LLM
     answer = call_llm(context, request.query)
 
     if "NOT_FOUND" in answer:
-        return {"answer": "Cannot answer based on the documents", "found": False}
+        return {"answer": "Cannot answer based on the documents", "found": False, "retrieved_chunks": retrieved_ids}
 
-    return {"answer": answer, "doc_id": request.doc_ids, "sources": all_sources}
+    return {"answer": answer, "doc_id": request.doc_ids, "sources": all_sources, "retrieved_chunks": retrieved_ids}
