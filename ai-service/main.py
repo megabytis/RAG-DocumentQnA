@@ -28,20 +28,24 @@ llm = ChatOpenAI(
 
 def call_llm(context, query):
 
-    system_prompt = """You must answer ONLY using the provided context.
+    system_prompt = """Answer using ONLY the provided context.
 
-    If information exists in context but not in compared form:
-    Synthesize answer from available information.
+    Rules:
+    - Return ONLY the final answer.
+    - Do NOT explain.
+    - Do NOT add extra words.
+    - Do NOT rephrase.
 
-    If answer is NOT in context at all:
-    respond with exactly: NOT_FOUND
+    If the answer is not explicitly present in the context:
+    return exactly: NOT_FOUND
+    """
+    user_prompt = f"""CONTEXT:
+    {context}
 
-    Do not guess.
-    Do not use outside knowledge."""
+    QUESTION:
+    {query}
 
-    user_prompt = f"""context: {context}
-    
-    Question: {query}"""
+    ANSWER:"""
 
     response = llm.invoke(
         [
