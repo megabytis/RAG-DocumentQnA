@@ -1,0 +1,252 @@
+[
+  {
+    "query": "What date did the WHO describe the COVID-19 outbreak as a pandemic?",
+    "expected": "11 March 2020",
+    "answer": "11 March 2020",
+    "retrieved_chunks": [
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_1",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_2",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_11",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_10",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_18"
+    ],
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_1",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the lowest pressure recorded for the 1999 Odisha cyclone?",
+    "expected": "912 hPa (mbar); 26.93 inHg",
+    "answer": "912 hPa (mbar); 26.93 inHg",
+    "retrieved_chunks": [
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_0",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_15",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_3",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_30",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_1"
+    ],
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_0",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the official ICAO code for Homey Airport?",
+    "expected": "KXTA",
+    "answer": "KXTA",
+    "retrieved_chunks": [
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_1",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_84",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_0",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_4",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_9"
+    ],
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_1",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What are the three common clusters of COVID-19 symptoms identified?",
+    "expected": "one respiratory symptom cluster, a musculoskeletal symptom cluster, a cluster of digestive symptoms",
+    "answer": "a cluster with cough, sputum , shortness of breath, and fever; a musculoskeletal symptom cluster with muscle and joint pain, headache, and fatigue; a cluster of digestive symptoms with abdominal pain, vomiting, and diarrhoea.",
+    "retrieved_chunks": [
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_39",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_2",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_58",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_56",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_37"
+    ],
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_38",
+    "relevant_chunk": true
+  },
+  {
+    "query": "How many fatalities were enumerated by the Government of India for the 1999 Odisha cyclone?",
+    "expected": "9,887",
+    "answer": "9,887",
+    "retrieved_chunks": [
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_6",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_1",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_30",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_0",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_23"
+    ],
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_6",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the name of the project under which the CIA established the Groom Lake test facility in April 1955?",
+    "expected": "Project AQUATONE",
+    "answer": "Project AQUA TONE",
+    "retrieved_chunks": [
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_13",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_16",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_10",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_20",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_88"
+    ],
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_13",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the infection fatality ratio (IFR) for the age group 85+?",
+    "expected": "28.3%",
+    "answer": "28.3%",
+    "retrieved_chunks": [
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_31",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_32",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_29",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_30",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_34"
+    ],
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_32",
+    "relevant_chunk": true
+  },
+  {
+    "query": "In which district of Odisha did the majority of deaths from the 1999 cyclone occur?",
+    "expected": "Jagatsinghpur",
+    "answer": "Cuttack",
+    "retrieved_chunks": [
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_6",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_23",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_30",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_25",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_0"
+    ],
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_27",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the name of the first full-scale development prototype of the F-117 that first flew at Area 51?",
+    "expected": "YF-117A 79-780",
+    "answer": "Have Blue",
+    "retrieved_chunks": [
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_58",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_61",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_62",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_59",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_64"
+    ],
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_59",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the name of the antiviral protease inhibitor approved by the EMA in 2021 to treat COVID-19?",
+    "expected": "Paxlovid",
+    "answer": "Paxlovid",
+    "retrieved_chunks": [
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_51",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_3",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_49",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_52",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_47"
+    ],
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_51",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the peak storm surge height estimated by the Indian Ministry of Urban Development for the 1999 Odisha cyclone?",
+    "expected": "6.7 metres (22 feet)",
+    "answer": "6.7 metres",
+    "retrieved_chunks": [
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_29",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_30",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_0",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_15",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_6"
+    ],
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_29",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the name of the project that tested Soviet tracking and missile control radar systems at Area 51?",
+    "expected": "HAVE GLIB",
+    "answer": "HAVE GLIB",
+    "retrieved_chunks": [
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_55",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_40",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_65",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_75",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_57"
+    ],
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_55",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the estimated infection fatality ratio (IFR) for seasonal flu in the United States compared to COVID-19?",
+    "expected": "0.1%",
+    "answer": "Cannot answer based on the documents",
+    "retrieved_chunks": [
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_34",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_31",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_27",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_32",
+      "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_5"
+    ],
+    "relevant_chunk_id": "ab4adbd5-7eee-4e11-bed2-7f8688dddd4c_chunk_34",
+    "relevant_chunk": true
+  },
+  {
+    "query": "How many people were evacuated from Odisha's coastline in preparation for the 1999 cyclone?",
+    "expected": "nearly 150,000",
+    "answer": "150,000",
+    "retrieved_chunks": [
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_22",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_23",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_25",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_6",
+      "5320ce59-13a9-4459-b00f-274e45684042_chunk_0"
+    ],
+    "relevant_chunk_id": "5320ce59-13a9-4459-b00f-274e45684042_chunk_22",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What was the name of the fly-by-wire technology demonstration aircraft tested at Area 51?",
+    "expected": "Tacit Blue",
+    "answer": "Tacit Blue",
+    "retrieved_chunks": [
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_65",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_40",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_64",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_2",
+      "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_55"
+    ],
+    "relevant_chunk_id": "054df5ac-44ee-49ff-b4a3-fd78a48c7937_chunk_65",
+    "relevant_chunk": true
+  },
+  {
+    "query": "What is the exact population of Rachel, Nevada?",
+    "expected": null,
+    "answer": "",
+    "retrieved_chunks": [],
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "Who was the first person to contract COVID-19?",
+    "expected": null,
+    "answer": "",
+    "retrieved_chunks": [],
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "What was the name of the ship that sank during the 1999 Odisha cyclone?",
+    "expected": null,
+    "answer": "",
+    "retrieved_chunks": [],
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "How many UFOs are stored at Area 51?",
+    "expected": null,
+    "answer": "",
+    "retrieved_chunks": [],
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  },
+  {
+    "query": "What is the current temperature at Groom Lake?",
+    "expected": null,
+    "answer": "",
+    "retrieved_chunks": [],
+    "relevant_chunk_id": null,
+    "relevant_chunk": false
+  }
+]
