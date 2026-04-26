@@ -10,7 +10,7 @@ def load_chunks(doc_id):
         return normalize_chunks(chunks)
 
 
-def bm25_search(chunks, query, top_k=3):
+def bm25_search(chunks, query, top_k=15):
     tokenized_chunks = [chunk["text"].split() for chunk in chunks]
     bm25 = BM25Okapi(tokenized_chunks)
     tokenized_query = query.split()
@@ -18,28 +18,28 @@ def bm25_search(chunks, query, top_k=3):
     return bm25_results
 
 
-def hybrid_search(doc_id, query, embedded_query, top_k=3):
+def hybrid_search(doc_id, query, embedded_query, top_k=15):
     chunks = load_chunks(doc_id)
 
     for idx, c in enumerate(chunks):
         c["_index"] = idx
 
-    bm25_results = bm25_search(chunks, query, top_k=5)
+    bm25_results = bm25_search(chunks, query, top_k=top_k)
     semantic_results = search_doc(
-        doc_id=doc_id, query_embedding=embedded_query, n_results=5
+        doc_id=doc_id, query_embedding=embedded_query, n_results=top_k
     )
 
     combined = {}
 
     for i, chunk in enumerate(bm25_results):
         idx = chunk["_index"]
-        combined[idx] = combined.get(idx, 0) + (5 - i)
+        combined[idx] = combined.get(idx, 0) + (top_k - i)
 
     semantic_metadatas = semantic_results.get("metadatas", [[]])[0]
     for i, metadata in enumerate(semantic_metadatas):
         idx = metadata.get("chunk_index")
         if idx is not None and idx < len(chunks):
-            combined[idx] = combined.get(idx, 0) + (5 - i) * 2
+            combined[idx] = combined.get(idx, 0) + (top_k - i) * 2
 
     sorted_idxs = sorted(combined.items(), key=lambda x: x[1], reverse=True)
 

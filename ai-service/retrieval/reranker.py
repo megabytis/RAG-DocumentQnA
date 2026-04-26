@@ -13,6 +13,6 @@ def rerank(query, chunks):
     scored.sort(key=lambda x: x[1], reverse=True)
 
     # taking only top 3
-    top_chunks = [chunk for chunk, score in scored[:3]]
+    top_chunks = [chunk for chunk, score in scored[:5]]
 
     return top_chunks
