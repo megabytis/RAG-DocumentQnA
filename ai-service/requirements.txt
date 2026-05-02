@@ -3,7 +3,6 @@ uvicorn
 pydantic
 PyPDF2
 python-docx
-fastembed
 chromadb
 langchain
 langchain-text-splitters
