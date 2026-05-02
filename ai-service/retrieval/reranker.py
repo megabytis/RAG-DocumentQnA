@@ -1,8 +1,7 @@
 from sentence_transformers import CrossEncoder
 
-model_path = "/home/megabytis/local_models/cross_encoder"
-
-model = CrossEncoder(model_path)
+MODEL_NAME = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+model = CrossEncoder(MODEL_NAME)
 
 def rerank(query, chunks):
     pairs = [[query, chunk["text"]] for chunk in chunks]
